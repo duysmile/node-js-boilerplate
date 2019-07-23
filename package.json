@@ -18,6 +18,7 @@
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
+    "dotenv": "^8.0.0",
     "express": "^4.16.4",
     "express-validation": "^1.0.2",
     "express-validator": "^5.3.1",
@@ -27,6 +28,7 @@
     "mongodb": "^3.2.3",
     "mongoose": "^5.5.7",
     "nodemailer": "^6.1.1",
+    "parse-function": "^5.2.11",
     "socket.io": "^2.2.0"
   },
   "devDependencies": {

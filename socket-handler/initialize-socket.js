@@ -1,5 +1,3 @@
-const message = require('./message');
-const room = require('./room');
 const { userRepository } = require('../repositories');
 
 exports.initialize = (io) => {

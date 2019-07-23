@@ -8,6 +8,8 @@ module.exports = {
             useFindAndModify: false,
             useCreateIndex: true
         });
+    },
+    loadModels: function() {
+        loadModulesInDir('models');
     }
-    // TODO: load all models
 };

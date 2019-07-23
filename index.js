@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const server = require('http').Server(app);
@@ -6,12 +7,11 @@ const cors = require('cors');
 
 const bodyParser = require('body-parser');
 
-const userApis = require('./apis/user.api');
-const loginApis = require('./apis/login.api');
+const apis = require('./apis');
 const socketHandler = require('./socket-handler');
 
 const models = require('./models');
-const port = 3001;
+const port = process.env.PORT || 3001;
 
 models.connectDB()
     .then(console.log('DB connected!'))
@@ -37,8 +37,7 @@ app.use(bodyParser.json({ type: 'application/json' }));
 app.use(express.static('public'));
 
 // load APIs
-userApis.load(app);
-loginApis.load(app);
+apis.load(app);
 
 // Error handling
 app.use(function (err, req, res, next) {

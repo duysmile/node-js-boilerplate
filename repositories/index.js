@@ -3,7 +3,8 @@ const BaseRepository = require('./base.repository');
 // ====================================
 // ============LOAD_MODELS=============
 // ====================================
-const User = require('../models/user');
+const { loadModels } = require('../models');
+loadModels();
 
 module.exports = {
     userRepository: new BaseRepository('User'),
