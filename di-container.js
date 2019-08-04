@@ -10,15 +10,15 @@ class DIContainer {
         this.dependencies = {};
     }
 
-    register = (name, dependency) => {
+    register(name, dependency) {
         this.dependencies[name] = dependency;
     }
 
-    factory = (name, factory) => {
+    factory(name, factory) {
         this.factories[name] = factory;
     }
 
-    get = (name) => {
+    get(name) {
         if (!this.dependencies[name]) {
             const factory = this.factories[name];
             this.dependencies[name] = factory && this.inject(factory);
@@ -30,11 +30,11 @@ class DIContainer {
         return this.dependencies[name];
     }
 
-    inject = (factory) => {
+    inject(factory) {
         const fnArgs = app.parse(factory).args
             .map(dependency => this.get(dependency));
         return factory.apply(null, fnArgs);
     }
 }
 
-module.exports = DIContainer;
+module.exports = new DIContainer();
