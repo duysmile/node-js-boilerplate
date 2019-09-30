@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const expressStatusMonitor = require('express-status-monitor');
 const pino = require('pino');
 const morgan = require('morgan');
+const helmet = require('helmet');
+
 const apis = require('./apis');
 const authBasic = require('./middlewares/basic-auth.middleware');
 const errorHanlder = require('./helpers/error-handler');
@@ -17,6 +19,7 @@ module.exports = (settings) => {
 
     const app = express();
 
+    app.use(helmet());
     app.use(morgan('dev'));
     app.use(compression());
     app.use(statusMonitor);
