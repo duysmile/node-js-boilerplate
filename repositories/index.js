@@ -4,5 +4,5 @@ const { loadModels } = require('../models');
 loadModels();
 
 module.exports = {
-    userRepository: new BaseRepository('User'),
+	userRepository: new BaseRepository('User'),
 };
