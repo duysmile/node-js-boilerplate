@@ -11,19 +11,9 @@ const errorHanlder = require('./helpers/error-handler');
 
 module.exports = (settings) => {
     const statusMonitor = expressStatusMonitor(settings.monitor);
-    const pinoSetting = pino(settings.logging.options, settings.logging.destination);
-    const logger = require('express-pino-logger')({ logger: pinoSetting });
+    const configedPino = pino(settings.logging.options, settings.logging.destination);
+    const logger = require('express-pino-logger')({ logger: configedPino });
     const corsHeaders = settings.cors;
-
-    process.on('uncaughtException', (err) => {
-        console.error('Unhandled Exception', err);
-        logger.error(err);
-    });
-    
-    process.on('uncaughtRejection', (err, _promise) => {
-        console.error('Unhandled Rejection', err);
-        logger.error(err);
-    });
 
     const app = express();
 
@@ -45,7 +35,7 @@ module.exports = (settings) => {
     apis.load(app);
 
     // Error handling
-    app.use(errorHanlder(logger));
+    app.use(errorHanlder(configedPino));
 
     return app;
 };

@@ -5,6 +5,24 @@ const models = require('../models');
 const server = require('./server');
 let connectionDB;
 
+const cleanup = (app) => {
+    return () => {
+        app.close(() => {
+            console.log("Closed out remaining connections.");
+            models.mongoose.connection.close();
+            process.exit(1);
+        });
+    };
+}
+
+process.on('uncaughtException', (err) => {
+    console.error('Unhandled Exception', err);
+});
+
+process.on('uncaughtRejection', (err, _promise) => {
+    console.error('Unhandled Rejection', err);
+});
+
 models.connectDB(dbSettings)
     .then(connection => {
         console.log('DB connected!');
@@ -17,6 +35,9 @@ models.connectDB(dbSettings)
             console.log('Server stopped.');
             connectionDB.disconnect();
         });
+
+        process.on('SIGINT', cleanup(app));
+        process.on('SIGTERM', cleanup(app));
     })
     .catch(e => {
         console.error(e);
