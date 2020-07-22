@@ -1,4 +1,5 @@
 # Nodejs boilerplate
+[![Coverage Status](https://coveralls.io/repos/github/duysmile/node-js-boilerplate/badge.svg?branch=master)](https://coveralls.io/github/duysmile/node-js-boilerplate?branch=master)
 
 Create a self-signed SSL certificate
 > cd configs/ssl
